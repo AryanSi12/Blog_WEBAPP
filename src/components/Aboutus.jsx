@@ -1,12 +1,16 @@
 import React from 'react';
 import Container from './Container';
-
+import { motion } from 'framer-motion';
 function Aboutus() {
   return (
     
     <section className="flex items-start justify-start min-h-screen bg-gradient-to-r from-teal-100 to-blue-100 p-10">
      <Container>
-      <div className="max-w-4xl">
+      <motion.div 
+      initial={{opacity:0 ,x:-100 }}
+      whileInView = {{opacity:1 , x:0 }}
+      transition={{ ease: "easeOut", duration: 0.5 }}
+      className="max-w-4xl">
         <h1 className="text-4xl pt-5 font-extrabold text-gray-500 mb-6">Welcome to Bloggerrr</h1>
         <p className="text-lg  text-black mb-4">
           At Bloggerrr, we believe in the power of words and the impact of sharing stories. Our platform is designed to bring together passionate writers and eager readers, creating a vibrant community where ideas thrive.
@@ -20,7 +24,7 @@ function Aboutus() {
         <p className="text-lg text-gray-800 mb-4">
           Start your journey with us today and see how BlogMaster can transform your blogging life. From insightful articles to inspiring stories, there's something for everyone on BlogMaster.
         </p>
-      </div>
+      </motion.div>
       </Container>
     </section>
    

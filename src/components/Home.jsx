@@ -4,7 +4,7 @@ import service from '../Appwrite/Config';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import {motion} from 'framer-motion';
 function Home() {
   const navigate=useNavigate()
   const [posts, setPosts] = useState([]);
@@ -75,7 +75,11 @@ function Home() {
   if (stat == false) {
     return (
       <section className="flex pt-32 justify-center bg-gradient-to-r from-teal-100 to-blue-100 min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <motion.div
+        initial={{opacity:0 ,x:-100 }}
+        whileInView = {{opacity:1 , x:0 }}
+        transition={{ ease: "easeOut", duration: 0.5 }}
+        className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Welcome to Blogerrr
           </h1>
@@ -114,53 +118,64 @@ function Home() {
             )}
         <ul className='max-w-md rounded-md shadow-slate-800 w-full bg-slate-50 flex flex-col box-decoration-slice mt-1 max-h-72 overflow-y-scroll hover:max-h-80 transition-all duration-300'>
           {!noResults && suggestion && suggestion.map((suggest)=>(
-            <li key={suggest.title}   className={"ml-3 py-2 "}>
+            <motion.li
+            initial={{opacity:0 ,x:-100 }}
+          whileInView = {{opacity:1 , x:0 }}
+          transition={{ ease: "easeOut", duration: 0.5 }}
+            key={suggest.title}   className={"ml-3 py-2 "}>
                 
                 <Link to={`/post/${suggest.$id}`}>
                 {suggest.title}
                 </Link>
-            </li>
+            </motion.li>
           ))}
           </ul>
         
       </div>
-
-          
-          
           <div className="text-3xl font-semibold ml-10 mt-24 text-black-900 mb-8">
-        Top Posts
+        Most Popular Posts
           </div>
           <div className="flex flex-col items-center">
           <div className="py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div
+          
+          className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
           { disp && disp.map((post) =>
-            <div key={post.$id} className="w-full">
+            <motion.div 
+            initial={{opacity:0 ,x:-100 ,rotate:-3}}
+            whileInView = {{opacity:1 , x:0 ,rotate:0}}
+            transition={{ ease: "easeOut", duration: 0.5 }}
+             key={post.$id} className="w-full">
               <PostCard {...post} />
-            </div>
+            </motion.div>
           )}
 
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="text-3xl font-semibold ml-10 mt-24 text-black-900 mb-8">
-        Recent Posts
+        Oldest Posts
       </div>
       <div className="flex flex-col items-center">
       <div className="py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
           { rec && rec.map((post) =>
-            <div key={post.$id} className="w-full">
+            <motion.div
+            initial={{opacity:0 ,x:-100 ,rotate:-3}}
+            whileInView = {{opacity:1 , x:0 ,rotate:0}}
+            transition={{ ease: "easeOut", duration: 0.5 }}
+            key={post.$id} className="w-full">
               <PostCard {...post} />
-            </div>
+            </motion.div>
 )}
 
           </div>
         </div>
       </div>
     
-        </div>
+        </motion.div>
       </section>
     );
     
@@ -169,7 +184,11 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-r pt-12 from-teal-100 to-blue-100 flex flex-col items-center">
   <Container>
-  <div className="container mx-auto px-4">
+  <motion.div
+  initial={{opacity:0 ,x:-100 }}
+  whileInView = {{opacity:1 , x:0 }}
+  transition={{ ease: "easeOut", duration: 1 }}
+  className="container mx-auto px-4">
   <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-center mt-4 text-teal-700">
     Welcome to Bloggerrr
   </h1>
@@ -215,45 +234,57 @@ function Home() {
       {!noResults &&
         suggestion &&
         suggestion.map((suggest) => (
-          <li key={suggest.title} className={"ml-3 py-2 "}>
+          <motion.li
+          initial={{opacity:0 ,x:-100 }}
+          whileInView = {{opacity:1 , x:0 }}
+          transition={{ ease: "easeOut", duration: 0.5 }}
+          key={suggest.title} className={"ml-3 py-2 "}>
             <Link to={`/post/${suggest.$id}`}>{suggest.title}</Link>
-          </li>
+          </motion.li>
         ))}
     </ul>
   </div>
 
   {/* Section for most liked posts */}
   <div className="text-2xl sm:text-3xl font-semibold ml-4 sm:ml-10 mt-16 sm:mt-24 text-teal-900 mb-8">
-    Most Liked Posts
+    Popular Posts
   </div>
   <div className="flex flex-col items-center">
     <div className="py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {disp &&
           disp.map((post) => (
-            <div key={post.$id} className="w-full">
+            <motion.div 
+            initial={{opacity:0 ,x:-100 ,rotate:-3}}
+            whileInView = {{opacity:1 , x:0 ,rotate:0}}
+            transition={{ ease: "easeOut", duration: 0.5 }}
+            key={post.$id} className="w-full">
               <PostCard {...post} />
-            </div>
+            </motion.div>
           ))}
       </div>
     </div>
   </div>
   <div className="text-2xl sm:text-3xl font-semibold ml-4 sm:ml-10 mt-16 sm:mt-24 text-teal-900 mb-8">
-    Recent Posts
+    Oldest Posts
   </div>
   <div className="flex flex-col items-center">
     <div className="py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {rec &&
           rec.map((post) => (
-            <div key={post.$id} className="w-full">
+            <motion.div
+            initial={{opacity:0 ,x:-100 ,rotate:-3}}
+            whileInView = {{opacity:1 , x:0 ,rotate:0}}
+            transition={{ ease: "easeOut", duration: 0.5 }}
+            key={post.$id} className="w-full">
               <PostCard {...post} />
-            </div>
+            </motion.div>
           ))}
       </div>
     </div>
   </div>
-</div>
+</motion.div>
 
   </Container>
 </div>

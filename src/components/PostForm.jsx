@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import service from '../Appwrite/Config'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { motion } from 'framer-motion'
 function PostForm({post}) {
     const navigate=useNavigate();
     const Data=useSelector((state)=>state.auth.data);
@@ -70,7 +71,11 @@ useEffect(()=>{
   return (
     
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap ">
-    <div className="w-2/3 px-2 ">
+    <motion.div
+    initial={{opacity:0 ,y:-100 }}
+    whileInView = {{opacity:1 , y:0 }}
+    transition={{ ease: "easeOut", duration: 1 }}
+    className="w-2/3 px-2 ">
         <Input
             label="Title :"
             placeholder="Title"
@@ -87,8 +92,12 @@ useEffect(()=>{
             }}
         />
         <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
-        </div>
-        <div className="w-1/3 px-2">
+        </motion.div>
+        <motion.div
+        initial={{opacity:0 ,y:-100 }}
+        whileInView = {{opacity:1 , y:0 }}
+        transition={{ ease: "easeOut", duration: 1 }}
+        className="w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
@@ -114,7 +123,7 @@ useEffect(()=>{
                 <Button type="submit" bgColor={post ? "bg-red-500" : undefined} className="w-full ">
                     {post ? "Update" : "Submit"}
                 </Button>
-                </div>
+                </motion.div>
         </form>
   )
 }

@@ -5,6 +5,7 @@ import service from '../Appwrite/Config';
 import parse from 'html-react-parser';
 import { Button, Container } from './index';
 import HTMLReactParser from 'html-react-parser/lib/index';
+import { motion } from 'framer-motion';
 function Post() {
     const navigate = useNavigate();
     const { slug } = useParams();
@@ -42,7 +43,11 @@ function Post() {
         <div className="min-h-screen bg-gradient-to-r from-teal-100 to-blue-100">
             <Container>
                 <div className="py-8">
-                    <div className="w-full flex justify-center mb-4 relative border rounded-xl overflow-hidden">
+                    <motion.div
+                    initial={{opacity:0 ,x:-100 ,rotate:0}}
+                    whileInView = {{opacity:1 , x:0 ,rotate:0}}
+                    transition={{ ease: "easeOut", duration: 1 }}
+                    className="w-full flex justify-center mb-4 relative border rounded-xl overflow-hidden">
                         <img
                             src={service.getFilePreview(post.Image)}
                             alt={post.title}
@@ -64,7 +69,7 @@ function Post() {
                                 </Button>
                             </div>
                         )}
-                    </div>
+                    </motion.div>
                     <div className="w-full mb-6">
                         <h1 className="text-3xl text-center font-bold text-gray-800">{post.title}</h1>
                     </div>
