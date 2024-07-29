@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import service from '../Appwrite/Config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function PostCard({ $id, title, Image, slug, Likes, Dislikes, LikedBy, DislikedBy }) {
@@ -10,7 +10,7 @@ function PostCard({ $id, title, Image, slug, Likes, Dislikes, LikedBy, DislikedB
   const [dislikes, setDislikes] = useState(Dislikes)
   const [isLiked, setisLiked] = useState(false)
   const [isDisliked, setisDisliked] = useState(false)
-
+  const navigate=useNavigate();
   useEffect(() => {
     if (userData) {
       setisLiked(LikedBy.includes(userData.$id));
@@ -20,6 +20,11 @@ function PostCard({ $id, title, Image, slug, Likes, Dislikes, LikedBy, DislikedB
 
   //Hnadling a click on like button
   const handleLike = (e) => {
+    
+    if(!userData){
+      alert("Login to like a post")
+      navigate("/Login")
+    }
     e.preventDefault()
     //If its already liked then reduce the like by 1 on click and also remove the user from likedby
     if (isLiked) {
@@ -75,6 +80,10 @@ function PostCard({ $id, title, Image, slug, Likes, Dislikes, LikedBy, DislikedB
   // To handle dislike action
 
   const handleDislike = (e) => {
+    if(!userData){
+      navigate("/Login")
+      alert("Login to dislike post")
+    }
     e.preventDefault()
     console.log("ll");
     if (isDisliked) {

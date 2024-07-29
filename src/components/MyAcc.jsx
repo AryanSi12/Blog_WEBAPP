@@ -7,7 +7,7 @@ function MyAcc() {
   const stat = useSelector((state) => state.auth.status);
   const [cnt, setCount] = useState(0);
   const [posts, setPost] = useState([]);
-  
+
   useEffect(() => {
     if (stat) {
       service.getPosts().then((posts) => {
